@@ -1,0 +1,201 @@
+.footer {
+  background: linear-gradient(180deg, var(--brown-800), var(--brown-900));
+  color: var(--cream-200);
+  padding-top: 0;
+}
+
+.racingStripe {
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--f1-red) 0px,
+    var(--f1-red) 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  animation: raceTrack 1s linear infinite;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+  gap: var(--space-2xl);
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+/* Brand */
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: var(--space-lg);
+}
+
+.footerLogo img {
+  border-radius: 50%;
+  border: 2px solid var(--green-400);
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--cream-100);
+}
+
+.brandTag {
+  font-family: var(--font-f1);
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: var(--green-400);
+  text-transform: uppercase;
+}
+
+.brandDesc {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--cream-300);
+  margin-bottom: var(--space-lg);
+}
+
+.socialLinks {
+  display: flex;
+  gap: 10px;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  color: var(--cream-200);
+  transition: all var(--duration-fast) var(--ease-smooth);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.socialLink:hover {
+  background: var(--green-500);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-glow-green);
+}
+
+/* Columns */
+.colTitle {
+  font-family: var(--font-f1);
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green-400);
+  margin-bottom: var(--space-lg);
+}
+
+.footerNav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerNav a {
+  font-size: 0.92rem;
+  color: var(--cream-300);
+  transition: all var(--duration-fast) var(--ease-smooth);
+  padding: 4px 0;
+}
+
+.footerNav a:hover {
+  color: var(--cream-100);
+  padding-left: 8px;
+}
+
+/* Hours */
+.hours {
+  margin-bottom: var(--space-md);
+}
+
+.hourRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.92rem;
+  color: var(--cream-300);
+}
+
+.hourTime {
+  font-weight: 600;
+  color: var(--green-300);
+}
+
+.f1Hours {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--cream-400);
+  margin-top: var(--space-sm);
+}
+
+.f1Emoji {
+  font-size: 1rem;
+}
+
+/* Contact */
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--cream-300);
+  line-height: 1.6;
+}
+
+.contactInfo a {
+  color: var(--green-300);
+  transition: color var(--duration-fast);
+}
+
+.contactInfo a:hover {
+  color: var(--cream-100);
+}
+
+/* Bottom Bar */
+.bottomBar {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding: var(--space-lg) 0;
+}
+
+.bottomInner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--cream-400);
+}
+
+.madeWith {
+  font-family: var(--font-f1);
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 900px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+}
+
+@media (max-width: 600px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bottomInner {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}

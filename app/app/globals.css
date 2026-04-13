@@ -1,0 +1,452 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Racing+Sans+One&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  /* === Brand Colors from Logo === */
+  --green-50: #f0f7f0;
+  --green-100: #dcefd8;
+  --green-200: #b5dfad;
+  --green-300: #7cc06e;
+  --green-400: #5a9a4d;
+  --green-500: #4a7a3f;
+  --green-600: #3d6634;
+  --green-700: #2f4f27;
+  --green-800: #243d1e;
+  --green-900: #1a2d16;
+
+  --brown-50: #faf5f0;
+  --brown-100: #f0e4d4;
+  --brown-200: #e0c9a8;
+  --brown-300: #c9a876;
+  --brown-400: #b08a4f;
+  --brown-500: #8a6a3a;
+  --brown-600: #6b4f2a;
+  --brown-700: #4d381e;
+  --brown-800: #3a2a17;
+  --brown-900: #2a1e10;
+
+  --cream-50: #fefdf8;
+  --cream-100: #fdf9ed;
+  --cream-200: #faf3db;
+  --cream-300: #f5eac4;
+  --cream-400: #eddda8;
+  --cream-500: #e0cc88;
+
+  /* === F1 Accent Colors === */
+  --f1-red: #e10600;
+  --f1-red-dark: #b80500;
+  --f1-carbon: #1a1a2e;
+  --f1-silver: #c0c0c0;
+  --f1-gold: #d4a843;
+
+  /* === Semantic Colors === */
+  --primary: var(--green-500);
+  --primary-light: var(--green-300);
+  --primary-dark: var(--green-700);
+  --secondary: var(--brown-500);
+  --secondary-light: var(--brown-300);
+  --secondary-dark: var(--brown-700);
+  --background: var(--cream-50);
+  --surface: #ffffff;
+  --surface-warm: var(--cream-100);
+  --text-primary: var(--brown-900);
+  --text-secondary: var(--brown-600);
+  --text-light: var(--cream-100);
+  --text-muted: var(--brown-400);
+  --accent: var(--f1-red);
+  --accent-dark: var(--f1-red-dark);
+  --border: var(--cream-300);
+
+  /* === Typography === */
+  --font-primary: 'Outfit', sans-serif;
+  --font-display: 'Playfair Display', serif;
+  --font-f1: 'Racing Sans One', cursive;
+
+  /* === Spacing === */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+
+  /* === Border Radius === */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+
+  /* === Shadows === */
+  --shadow-sm: 0 1px 3px rgba(42, 30, 16, 0.08);
+  --shadow-md: 0 4px 16px rgba(42, 30, 16, 0.1);
+  --shadow-lg: 0 8px 32px rgba(42, 30, 16, 0.12);
+  --shadow-xl: 0 16px 48px rgba(42, 30, 16, 0.16);
+  --shadow-glow-green: 0 0 20px rgba(74, 122, 63, 0.3);
+  --shadow-glow-red: 0 0 20px rgba(225, 6, 0, 0.3);
+
+  /* === Transitions === */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 350ms;
+  --duration-slow: 600ms;
+}
+
+/* === Reset & Base === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* === Utility Classes === */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+.section {
+  padding: var(--space-4xl) 0;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  font-weight: 300;
+}
+
+.f1-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-f1);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--f1-red);
+  background: rgba(225, 6, 0, 0.08);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(225, 6, 0, 0.15);
+}
+
+.f1-tag::before {
+  content: '🏎️';
+  font-size: 0.85rem;
+}
+
+/* === Button Styles === */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-full);
+  transition: all var(--duration-normal) var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left var(--duration-slow) var(--ease-smooth);
+}
+
+.btn:hover::before {
+  left: 100%;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--green-500), var(--green-600));
+  color: white;
+  box-shadow: var(--shadow-md), var(--shadow-glow-green);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow-green);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--green-600);
+  border: 2px solid var(--green-400);
+}
+
+.btn-secondary:hover {
+  background: var(--green-50);
+  transform: translateY(-2px);
+}
+
+.btn-accent {
+  background: linear-gradient(135deg, var(--f1-red), var(--f1-red-dark));
+  color: white;
+  box-shadow: var(--shadow-md), var(--shadow-glow-red);
+}
+
+.btn-accent:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow-red);
+}
+
+/* === F1-Inspired Racing Stripe === */
+.racing-stripe {
+  position: relative;
+}
+
+.racing-stripe::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--f1-red) 0px,
+    var(--f1-red) 20px,
+    transparent 20px,
+    transparent 40px
+  );
+}
+
+/* === Checkered Pattern === */
+.checkered-accent {
+  position: relative;
+}
+
+.checkered-accent::before {
+  content: '';
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-image:
+    linear-gradient(45deg, var(--brown-800) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--brown-800) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--brown-800) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--brown-800) 75%);
+  background-size: 10px 10px;
+  background-position: 0 0, 0 5px, 5px -5px, -5px 0;
+  opacity: 0.1;
+  border-radius: var(--radius-sm);
+}
+
+/* === Card Styles === */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--duration-normal) var(--ease-smooth);
+  border: 1px solid var(--border);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* === Star Rating === */
+.stars {
+  display: flex;
+  gap: 2px;
+  color: var(--f1-gold);
+  font-size: 1rem;
+}
+
+/* === Animations === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes raceTrack {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(225, 6, 0, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(225, 6, 0, 0.6); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes speedLines {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+
+.animate-fade-up {
+  animation: fadeInUp 0.8s var(--ease-smooth) forwards;
+}
+
+.animate-fade-left {
+  animation: fadeInLeft 0.8s var(--ease-smooth) forwards;
+}
+
+.animate-fade-right {
+  animation: fadeInRight 0.8s var(--ease-smooth) forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.6s var(--ease-smooth) forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+
+/* === Scrollbar === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cream-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--green-400);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--green-600);
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  .section {
+    padding: var(--space-3xl) 0;
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+  }
+
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+}

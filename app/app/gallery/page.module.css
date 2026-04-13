@@ -1,0 +1,250 @@
+/* ======= GALLERY HERO ======= */
+.galleryPage { padding-top: 0; }
+
+.galleryHero {
+  position: relative;
+  min-height: 55vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.galleryHeroImage { position: absolute; inset: 0; }
+
+.galleryHeroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(26, 45, 22, 0.88), rgba(42, 30, 16, 0.85));
+}
+
+.galleryHeroContent {
+  position: relative;
+  z-index: 2;
+  padding-top: 140px;
+  padding-bottom: var(--space-3xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.galleryHeroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: white;
+  margin: var(--space-md) 0;
+}
+
+.galleryHeroDesc {
+  font-size: 1.1rem;
+  color: var(--cream-200);
+  max-width: 550px;
+  font-weight: 300;
+}
+
+/* ======= GALLERY CONTENT ======= */
+.galleryContent { background: var(--background); }
+
+.filterBar {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: var(--space-2xl);
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: 10px 24px;
+  border-radius: var(--radius-full);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.filterBtn:hover {
+  border-color: var(--green-300);
+  color: var(--green-700);
+}
+
+.filterBtn.filterActive {
+  background: var(--green-500);
+  color: white;
+  border-color: var(--green-500);
+  box-shadow: var(--shadow-glow-green);
+}
+
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.galleryItem {
+  cursor: pointer;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-smooth);
+}
+
+.galleryItem:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-xl);
+}
+
+.galleryImageWrapper {
+  position: relative;
+  height: 300px;
+}
+
+.galleryItemOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 40%, rgba(26, 45, 22, 0.85));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-xl);
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-smooth);
+}
+
+.galleryItem:hover .galleryItemOverlay { opacity: 1; }
+
+.galleryCategory {
+  font-family: var(--font-f1);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: var(--f1-red);
+  text-transform: uppercase;
+}
+
+.galleryCaption {
+  font-family: var(--font-display);
+  color: white;
+  font-size: 1.1rem;
+  margin: 6px 0;
+}
+
+.galleryView {
+  font-size: 0.82rem;
+  color: var(--cream-300);
+}
+
+/* ======= INSTAGRAM CTA ======= */
+.instaCTA {
+  text-align: center;
+  margin-top: var(--space-4xl);
+  padding: var(--space-3xl);
+  background: var(--surface-warm);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+}
+
+.instaIcon { font-size: 2.5rem; margin-bottom: var(--space-md); }
+.instaTitle { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: var(--space-sm); }
+.instaDesc { font-size: 1rem; color: var(--text-secondary); margin-bottom: var(--space-xl); }
+
+/* ======= LIGHTBOX ======= */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0,0,0,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.3s var(--ease-smooth);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightboxImage {
+  position: relative;
+  width: 80vw;
+  height: 70vh;
+}
+
+.lightboxClose {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  background: none;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--duration-fast);
+}
+
+.lightboxClose:hover { background: rgba(255,255,255,0.1); }
+
+.lightboxPrev,
+.lightboxNext {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  background: rgba(255,255,255,0.05);
+  border: none;
+  width: 60px;
+  height: 80px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--duration-fast);
+}
+
+.lightboxPrev { left: 20px; }
+.lightboxNext { right: 20px; }
+.lightboxPrev:hover,
+.lightboxNext:hover { background: rgba(255,255,255,0.15); }
+
+.lightboxCaption {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+}
+
+.lightboxCaption span {
+  font-family: var(--font-f1);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--f1-red);
+}
+
+.lightboxCaption p {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-top: 4px;
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 768px) {
+  .galleryGrid { grid-template-columns: 1fr; }
+  .galleryImageWrapper { height: 250px; }
+  .galleryItemOverlay { opacity: 1; }
+  .lightboxImage { width: 95vw; height: 60vh; }
+}
