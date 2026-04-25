@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
+import ScrollReveal from '../components/ScrollReveal';
 
 const galleryItems = [
   { src: '/hero-interior.png', alt: 'F1 Themed Interior', category: 'Interior', caption: 'Racing vibes in every corner' },
@@ -44,12 +45,18 @@ export default function GalleryPage() {
           />
         </div>
         <div className={`container ${styles.galleryHeroContent}`}>
-          <span className="f1-tag">Gallery</span>
-          <h1 className={styles.galleryHeroTitle}>Capture the Vibes</h1>
-          <p className={styles.galleryHeroDesc}>
-            Every corner of Hananee is designed to be photogenic. Explore our F1-inspired 
-            interiors, artisan drinks, and delicious food — your phone shoots content on its own. 📸
-          </p>
+          <ScrollReveal animation="fadeRight">
+            <span className="f1-tag">Gallery</span>
+          </ScrollReveal>
+          <ScrollReveal animation="fadeLeft" delay={200}>
+            <h1 className={styles.galleryHeroTitle}>Capture the Vibes</h1>
+          </ScrollReveal>
+          <ScrollReveal animation="fadeUp" delay={400}>
+            <p className={styles.galleryHeroDesc}>
+              Every corner of Hananee is designed to be photogenic. Explore our F1-inspired 
+              interiors, artisan drinks, and delicious food — your phone shoots content on its own. 📸
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -57,61 +64,66 @@ export default function GalleryPage() {
       <section className={`section ${styles.galleryContent}`}>
         <div className="container">
           {/* Category Filters */}
-          <div className={styles.filterBar}>
-            {categories.map(cat => (
-              <button
-                key={cat}
-                className={`${styles.filterBtn} ${activeCategory === cat ? styles.filterActive : ''}`}
-                onClick={() => setActiveCategory(cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+          <ScrollReveal animation="fadeDown">
+            <div className={styles.filterBar}>
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  className={`${styles.filterBtn} ${activeCategory === cat ? styles.filterActive : ''}`}
+                  onClick={() => setActiveCategory(cat)}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </ScrollReveal>
 
           {/* Gallery Grid */}
           <div className={styles.galleryGrid}>
             {filteredItems.map((item, i) => (
-              <div
-                key={i}
-                className={styles.galleryItem}
-                onClick={() => openLightbox(i)}
-              >
-                <div className={styles.galleryImageWrapper}>
-                  <Image 
-                    src={item.src} 
-                    alt={item.alt} 
-                    fill 
-                    style={{ objectFit: 'cover' }}
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                  <div className={styles.galleryItemOverlay}>
-                    <span className={styles.galleryCategory}>{item.category}</span>
-                    <h3 className={styles.galleryCaption}>{item.caption}</h3>
-                    <span className={styles.galleryView}>🔍 View Full</span>
+              <ScrollReveal key={i} animation="scaleUp" stagger={80} index={i}>
+                <div
+                  className={styles.galleryItem}
+                  onClick={() => openLightbox(i)}
+                >
+                  <div className={styles.galleryImageWrapper}>
+                    <Image 
+                      src={item.src} 
+                      alt={item.alt} 
+                      fill 
+                      style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className={styles.galleryItemOverlay}>
+                      <span className={styles.galleryCategory}>{item.category}</span>
+                      <h3 className={styles.galleryCaption}>{item.caption}</h3>
+                      <span className={styles.galleryView}>🔍 View Full</span>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
 
           {/* Instagram CTA */}
-          <div className={styles.instaCTA}>
-            <div className={styles.instaIcon}>📸</div>
-            <h3 className={styles.instaTitle}>See More on Instagram</h3>
-            <p className={styles.instaDesc}>
-              Follow <strong>@hananeecafe</strong> for daily updates, behind-the-scenes, 
-              and new menu drops.
-            </p>
-            <a
-              href="https://www.instagram.com/hananeecafe/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              Follow on Instagram →
-            </a>
-          </div>
+          <ScrollReveal animation="fadeUp" delay={200}>
+            <div className={styles.instaCTA}>
+              <div className={styles.instaIcon}>📸</div>
+              <h3 className={styles.instaTitle}>See More on Instagram</h3>
+              <p className={styles.instaDesc}>
+                Follow <strong>@hananeecafe</strong> for daily updates, behind-the-scenes, 
+                and new menu drops.
+              </p>
+              <a
+                href="https://www.instagram.com/hananeecafe/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Follow on Instagram →
+              </a>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 

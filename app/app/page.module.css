@@ -11,86 +11,144 @@
   position: absolute;
   inset: 0;
   z-index: 0;
+  overflow: hidden;
+}
+
+.heroVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  /* Slight scale to avoid edge artifacts */
+}
+
+.heroImage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(26, 45, 22, 0.3) 100%);
+  z-index: 1;
 }
 
 .heroOverlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(
-    135deg,
-    rgba(26, 45, 22, 0.85) 0%,
-    rgba(42, 30, 16, 0.75) 50%,
-    rgba(26, 26, 46, 0.7) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(26, 45, 22, 0.85) 0%,
+      rgba(42, 30, 16, 0.75) 50%,
+      rgba(26, 26, 46, 0.7) 100%);
 }
 
 .heroContent {
   position: relative;
   z-index: 2;
-  padding-top: 120px;
-  animation: fadeInUp 1s var(--ease-smooth);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 60px;
 }
 
-.heroTag {
-  margin-bottom: var(--space-lg);
-}
-
-.heroTitle {
-  font-family: var(--font-display);
-  color: white;
+.heroMainBranding {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xl);
   margin-bottom: var(--space-xl);
-  line-height: 1.1;
 }
 
-.heroLine1 {
-  display: block;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 400;
-  opacity: 0.9;
-  animation: fadeInLeft 0.8s var(--ease-smooth) 0.3s forwards;
-  opacity: 0;
+.heroLogoWrapper {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--green-400);
+  box-shadow: var(--shadow-glow-green), 0 0 40px rgba(0, 0, 0, 0.5);
+  animation: float 4s ease-in-out infinite;
 }
 
-.heroLine2 {
-  display: block;
-  font-size: clamp(3rem, 7vw, 5.5rem);
+.heroLogo {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.heroBrandInfo {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.heroBrandName {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 6rem);
   font-weight: 700;
-  background: linear-gradient(135deg, var(--green-300), var(--cream-300));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: fadeInLeft 0.8s var(--ease-smooth) 0.5s forwards;
-  opacity: 0;
+  color: white;
+  line-height: 0.9;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  letter-spacing: -2px;
 }
 
-.heroDesc {
-  font-size: 1.15rem;
+.heroBrandTagline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.heroTagF1 {
+  font-family: var(--font-f1);
+  font-size: 1.2rem;
+  color: var(--f1-red);
+  letter-spacing: 4px;
+}
+
+.heroTagLine {
+  flex: 1;
+  height: 2px;
+  min-width: 40px;
+  background: linear-gradient(90deg, var(--f1-red), transparent);
+}
+
+.heroTagSlogan {
+  font-family: var(--font-primary);
+  font-size: 0.8rem;
+  color: var(--cream-300);
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.heroSubtitle {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
   color: var(--cream-200);
-  max-width: 550px;
-  line-height: 1.8;
-  margin-bottom: var(--space-2xl);
   font-weight: 300;
-  animation: fadeInUp 0.8s var(--ease-smooth) 0.7s forwards;
-  opacity: 0;
+  letter-spacing: 1px;
+  margin-bottom: var(--space-2xl);
+  max-width: 600px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .heroCTA {
   display: flex;
-  gap: 16px;
+  gap: 20px;
+  justify-content: center;
   flex-wrap: wrap;
   margin-bottom: var(--space-3xl);
-  animation: fadeInUp 0.8s var(--ease-smooth) 0.9s forwards;
-  opacity: 0;
 }
 
 .heroCTA .btn-secondary {
-  border-color: rgba(255,255,255,0.4);
+  border-color: rgba(255, 255, 255, 0.4);
   color: white;
 }
 
 .heroCTA .btn-secondary:hover {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-color: white;
 }
 
@@ -124,7 +182,7 @@
 .heroDivider {
   width: 1px;
   height: 40px;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* Scroll Indicator */
@@ -149,7 +207,7 @@
 .scrollMouse {
   width: 24px;
   height: 38px;
-  border: 2px solid rgba(255,255,255,0.4);
+  border: 2px solid rgba(255, 255, 255, 0.4);
   border-radius: 12px;
   display: flex;
   justify-content: center;
@@ -165,8 +223,15 @@
 }
 
 @keyframes scrollPulse {
-  0% { transform: translateY(0); opacity: 1; }
-  100% { transform: translateY(12px); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
 }
 
 /* ======= SECTION HEADER ======= */
@@ -177,6 +242,8 @@
 
 .sectionHeader .section-subtitle {
   margin: var(--space-md) auto 0;
+  text-align: center;
+  max-width: 600px;
 }
 
 /* ======= FEATURED DRINKS ======= */
@@ -193,7 +260,6 @@
 .drinkCard {
   background: var(--surface);
   border-radius: var(--radius-lg);
-  padding: var(--space-2xl) var(--space-xl);
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -207,23 +273,29 @@
   border-color: var(--green-300);
 }
 
-.drinkIcon {
-  font-size: 3rem;
-  margin-bottom: var(--space-md);
-  display: block;
+/* Drink card image */
+.drinkImageWrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
 }
 
-.drinkRating {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--f1-gold);
-  background: rgba(212, 168, 67, 0.1);
-  padding: 4px 12px;
-  border-radius: var(--radius-full);
-  margin-bottom: var(--space-md);
+.drinkImageWrapper img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
+
+.drinkCard:hover .drinkImageWrapper img {
+  transform: scale(1.08) !important;
+}
+
+.drinkCardContent {
+  position: relative;
+  z-index: 2;
+  padding: var(--space-lg) var(--space-xl) var(--space-2xl);
+}
+
+
 
 .drinkName {
   font-family: var(--font-display);
@@ -293,6 +365,14 @@
   box-shadow: var(--shadow-lg);
 }
 
+.aboutImageMain img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.aboutImageMain:hover img {
+  transform: scale(1.05) !important;
+}
+
 .aboutImageSmall {
   position: absolute;
   bottom: 0;
@@ -303,6 +383,14 @@
   overflow: hidden;
   box-shadow: var(--shadow-xl);
   border: 4px solid var(--surface);
+}
+
+.aboutImageSmall img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.aboutImageSmall:hover img {
+  transform: scale(1.08) !important;
 }
 
 .aboutBadge {
@@ -365,6 +453,14 @@
   font-weight: 500;
   font-size: 0.92rem;
   color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  transition: all var(--duration-fast) var(--ease-smooth);
+}
+
+.feature:hover {
+  background: var(--green-50);
+  transform: translateX(4px);
 }
 
 .featureIcon {
@@ -391,6 +487,14 @@
   box-shadow: var(--shadow-lg);
 }
 
+.foodImageWrapper img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.foodImageWrapper:hover img {
+  transform: scale(1.05) !important;
+}
+
 .foodOverlay {
   position: absolute;
   bottom: 0;
@@ -398,6 +502,7 @@
   right: 0;
   padding: var(--space-xl);
   background: linear-gradient(transparent, rgba(42, 30, 16, 0.9));
+  z-index: 1;
 }
 
 .foodHighlight {
@@ -514,6 +619,12 @@
   justify-content: center;
   font-size: 1.3rem;
   border: 2px solid var(--green-200);
+  transition: all var(--duration-normal) var(--ease-smooth);
+}
+
+.reviewCard:hover .reviewAvatar {
+  border-color: var(--f1-red);
+  box-shadow: var(--shadow-glow-red);
 }
 
 .reviewName {
@@ -556,13 +667,11 @@
   position: absolute;
   inset: 0;
   background-image:
-    repeating-linear-gradient(
-      90deg,
+    repeating-linear-gradient(90deg,
       transparent 0px,
       transparent 38px,
       rgba(225, 6, 0, 0.05) 38px,
-      rgba(225, 6, 0, 0.05) 40px
-    );
+      rgba(225, 6, 0, 0.05) 40px);
 }
 
 .ctaContent {
@@ -627,6 +736,24 @@
 }
 
 @media (max-width: 768px) {
+  .heroMainBranding {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .heroBrandInfo {
+    text-align: center;
+  }
+
+  .heroBrandName {
+    font-size: 3rem;
+  }
+
+  .heroLogoWrapper {
+    width: 100px;
+    height: 100px;
+  }
+
   .heroStats {
     flex-wrap: wrap;
     gap: var(--space-lg);
@@ -638,6 +765,10 @@
 
   .drinkGrid {
     grid-template-columns: 1fr;
+  }
+
+  .drinkImageWrapper {
+    height: 200px;
   }
 
   .reviewGrid {

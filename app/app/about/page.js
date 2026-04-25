@@ -1,11 +1,9 @@
+'use client';
+
 import styles from './page.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-
-export const metadata = {
-  title: 'Our Story — Hananee Café | F1-Inspired Coffee Experience',
-  description: 'Discover the story behind Hananee Café — where an F1 fan\'s dream became Kuching\'s trendiest coffee destination. Coffee + vibes + aesthetics.',
-};
+import ScrollReveal from '../components/ScrollReveal';
 
 export default function AboutPage() {
   return (
@@ -24,11 +22,17 @@ export default function AboutPage() {
           />
         </div>
         <div className={`container ${styles.aboutHeroContent}`}>
-          <span className="f1-tag">Our Story</span>
-          <h1 className={styles.aboutHeroTitle}>The Story Behind<br/>Every Cup</h1>
-          <p className={styles.aboutHeroDesc}>
-            Where an F1 fan&apos;s lifelong dream became reality — one cup at a time.
-          </p>
+          <ScrollReveal animation="fadeRight">
+            <span className="f1-tag">Our Story</span>
+          </ScrollReveal>
+          <ScrollReveal animation="fadeLeft" delay={200}>
+            <h1 className={styles.aboutHeroTitle}>The Story Behind<br/>Every Cup</h1>
+          </ScrollReveal>
+          <ScrollReveal animation="fadeUp" delay={400}>
+            <p className={styles.aboutHeroDesc}>
+              Where an F1 fan&apos;s lifelong dream became reality — one cup at a time.
+            </p>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -36,41 +40,45 @@ export default function AboutPage() {
       <section className={`section ${styles.originSection}`}>
         <div className="container">
           <div className={styles.originGrid}>
-            <div className={styles.originText}>
-              <span className={styles.chapterTag}>Chapter 01</span>
-              <h2 className={`section-title ${styles.originTitle}`}>
-                A Dream Fueled by Passion
-              </h2>
-              <p className={styles.originDesc}>
-                Every great story starts with a dream. For the founder of Hananee Café, that dream 
-                was to create a space that combines two of life&apos;s greatest passions — the artistry 
-                of coffee and the adrenaline of Formula 1 racing.
-              </p>
-              <p className={styles.originDesc}>
-                The owner really poured his heart into this place, turning his long-time dream into 
-                reality. The whole space is designed around racing elements — walls adorned with F1 
-                memorabilia, displays showcasing the sport&apos;s rich history, and lighting that makes 
-                every corner feel like a scene from the paddock.
-              </p>
-              <p className={styles.originDesc}>
-                Located at Jalan Simpang Tiga in Kuching, right beside Titik Temu and near 
-                Swinburne University, Hananee quickly became the go-to spot for students, 
-                professionals, and coffee enthusiasts seeking something truly different.
-              </p>
-            </div>
-            <div className={styles.originImage}>
-              <Image 
-                src="/hero-interior.png" 
-                alt="Hananee F1 Interior" 
-                fill 
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className={styles.originOverlayBadge}>
-                <span className={styles.obIcon}>🏎️</span>
-                <span className={styles.obText}>Est. 2025</span>
+            <ScrollReveal animation="fadeRight">
+              <div className={styles.originText}>
+                <span className={styles.chapterTag}>Chapter 01</span>
+                <h2 className={`section-title ${styles.originTitle}`}>
+                  A Dream Fueled by Passion
+                </h2>
+                <p className={styles.originDesc}>
+                  Every great story starts with a dream. For the founder of Hananee Café, that dream 
+                  was to create a space that combines two of life&apos;s greatest passions — the artistry 
+                  of coffee and the adrenaline of Formula 1 racing.
+                </p>
+                <p className={styles.originDesc}>
+                  The owner really poured his heart into this place, turning his long-time dream into 
+                  reality. The whole space is designed around racing elements — walls adorned with F1 
+                  memorabilia, displays showcasing the sport&apos;s rich history, and lighting that makes 
+                  every corner feel like a scene from the paddock.
+                </p>
+                <p className={styles.originDesc}>
+                  Located at Jalan Simpang Tiga in Kuching, right beside Titik Temu and near 
+                  Swinburne University, Hananee quickly became the go-to spot for students, 
+                  professionals, and coffee enthusiasts seeking something truly different.
+                </p>
               </div>
-            </div>
+            </ScrollReveal>
+            <ScrollReveal animation="fadeLeft">
+              <div className={styles.originImage}>
+                <Image 
+                  src="/hero-interior.png" 
+                  alt="Hananee F1 Interior" 
+                  fill 
+                  style={{ objectFit: 'cover' }}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className={styles.originOverlayBadge}>
+                  <span className={styles.obIcon}>🏎️</span>
+                  <span className={styles.obText}>Est. 2025</span>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -78,14 +86,16 @@ export default function AboutPage() {
       {/* Values Section */}
       <section className={`section ${styles.valuesSection}`}>
         <div className="container">
-          <div className={styles.valuesSectionHeader}>
-            <span className="f1-tag">What Drives Us</span>
-            <h2 className="section-title">Our Pit Crew Values</h2>
-            <p className="section-subtitle" style={{ margin: '0 auto' }}>
-              Like a winning F1 team, every detail matters. These are the values 
-              that keep us on the podium.
-            </p>
-          </div>
+          <ScrollReveal animation="fadeUp">
+            <div className={styles.valuesSectionHeader}>
+              <span className="f1-tag">What Drives Us</span>
+              <h2 className="section-title">Our Pit Crew Values</h2>
+              <p className="section-subtitle">
+                Like a winning F1 team, every detail matters. These are the values 
+                that keep us on the podium.
+              </p>
+            </div>
+          </ScrollReveal>
 
           <div className={styles.valuesGrid}>
             {[
@@ -126,12 +136,14 @@ export default function AboutPage() {
                 f1Term: "TURBO BOOST"
               },
             ].map((value, i) => (
-              <div key={i} className={styles.valueCard}>
-                <span className={styles.valueF1}>{value.f1Term}</span>
-                <div className={styles.valueIcon}>{value.icon}</div>
-                <h3 className={styles.valueTitle}>{value.title}</h3>
-                <p className={styles.valueDesc}>{value.desc}</p>
-              </div>
+              <ScrollReveal key={i} animation="flipUp" stagger={100} index={i}>
+                <div className={styles.valueCard}>
+                  <span className={styles.valueF1}>{value.f1Term}</span>
+                  <div className={styles.valueIcon}>{value.icon}</div>
+                  <h3 className={styles.valueTitle}>{value.title}</h3>
+                  <p className={styles.valueDesc}>{value.desc}</p>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
@@ -141,52 +153,58 @@ export default function AboutPage() {
       <section className={`section ${styles.experienceSection}`}>
         <div className="container">
           <div className={styles.experienceGrid}>
-            <div className={styles.experienceImages}>
-              <div className={styles.expImgLarge}>
-                <Image 
-                  src="/cafe-exterior.png" 
-                  alt="Hananee Cafe Exterior" 
-                  fill 
-                  style={{ objectFit: 'cover' }}
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+            <ScrollReveal animation="fadeLeft">
+              <div className={styles.experienceImages}>
+                <div className={styles.expImgLarge}>
+                  <Image 
+                    src="/cafe-exterior.png" 
+                    alt="Hananee Cafe Exterior" 
+                    fill 
+                    style={{ objectFit: 'cover' }}
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                </div>
+                <div className={styles.expImgSmall}>
+                  <Image 
+                    src="/food-spread.png" 
+                    alt="Hananee Food" 
+                    fill 
+                    style={{ objectFit: 'cover' }}
+                    sizes="250px"
+                  />
+                </div>
               </div>
-              <div className={styles.expImgSmall}>
-                <Image 
-                  src="/food-spread.png" 
-                  alt="Hananee Food" 
-                  fill 
-                  style={{ objectFit: 'cover' }}
-                  sizes="250px"
-                />
+            </ScrollReveal>
+            <ScrollReveal animation="fadeRight">
+              <div className={styles.experienceText}>
+                <span className={styles.chapterTag}>Chapter 02</span>
+                <h2 className={`section-title ${styles.experienceTitle}`}>
+                  More Than Just a Café
+                </h2>
+                <div className={styles.experienceList}>
+                  {[
+                    { icon: "🏎️", text: "F1-themed interior with racing memorabilia and checkered patterns" },
+                    { icon: "📸", text: "Every corner is Instagram-worthy — your phone shoots content on its own" },
+                    { icon: "🎲", text: "Board games available for group hangouts and chill sessions" },
+                    { icon: "📚", text: "Cozy study spot for students — perfect for assignments and projects" },
+                    { icon: "🅿️", text: "Free parking lot with plenty of spaces available" },
+                    { icon: "🍽️", text: "Dine-in, takeaway, and delivery options available" },
+                    { icon: "👪", text: "Family-friendly environment — good for kids and groups" },
+                    { icon: "🕘", text: "Open 9 AM to 11 PM daily — late-night hangout welcome" },
+                  ].map((item, i) => (
+                    <ScrollReveal key={i} animation="fadeRight" stagger={60} index={i}>
+                      <div className={styles.expItem}>
+                        <span className={styles.expItemIcon}>{item.icon}</span>
+                        <span className={styles.expItemText}>{item.text}</span>
+                      </div>
+                    </ScrollReveal>
+                  ))}
+                </div>
+                <Link href="/contact" className="btn btn-primary" style={{ alignSelf: 'flex-start', marginTop: '16px' }}>
+                  📍 Visit Us Today
+                </Link>
               </div>
-            </div>
-            <div className={styles.experienceText}>
-              <span className={styles.chapterTag}>Chapter 02</span>
-              <h2 className={`section-title ${styles.experienceTitle}`}>
-                More Than Just a Café
-              </h2>
-              <div className={styles.experienceList}>
-                {[
-                  { icon: "🏎️", text: "F1-themed interior with racing memorabilia and checkered patterns" },
-                  { icon: "📸", text: "Every corner is Instagram-worthy — your phone shoots content on its own" },
-                  { icon: "🎲", text: "Board games available for group hangouts and chill sessions" },
-                  { icon: "📚", text: "Cozy study spot for students — perfect for assignments and projects" },
-                  { icon: "🅿️", text: "Free parking lot with plenty of spaces available" },
-                  { icon: "🍽️", text: "Dine-in, takeaway, and delivery options available" },
-                  { icon: "👪", text: "Family-friendly environment — good for kids and groups" },
-                  { icon: "🕘", text: "Open 9 AM to 11 PM daily — late-night hangout welcome" },
-                ].map((item, i) => (
-                  <div key={i} className={styles.expItem}>
-                    <span className={styles.expItemIcon}>{item.icon}</span>
-                    <span className={styles.expItemText}>{item.text}</span>
-                  </div>
-                ))}
-              </div>
-              <Link href="/contact" className="btn btn-primary" style={{ alignSelf: 'flex-start', marginTop: '16px' }}>
-                📍 Visit Us Today
-              </Link>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
@@ -200,11 +218,13 @@ export default function AboutPage() {
             { value: "7", label: "Days Open", icon: "📅" },
             { value: "448+", label: "Facebook Likes", icon: "❤️" },
           ].map((stat, i) => (
-            <div key={i} className={styles.statItem}>
-              <span className={styles.statIcon}>{stat.icon}</span>
-              <span className={styles.statValue}>{stat.value}</span>
-              <span className={styles.statLabel}>{stat.label}</span>
-            </div>
+            <ScrollReveal key={i} animation="scaleUp" stagger={120} index={i}>
+              <div className={styles.statItem}>
+                <span className={styles.statIcon}>{stat.icon}</span>
+                <span className={styles.statValue}>{stat.value}</span>
+                <span className={styles.statLabel}>{stat.label}</span>
+              </div>
+            </ScrollReveal>
           ))}
         </div>
       </section>

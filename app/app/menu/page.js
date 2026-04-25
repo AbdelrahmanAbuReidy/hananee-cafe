@@ -1,10 +1,8 @@
+'use client';
+
 import styles from './page.module.css';
 import Image from 'next/image';
-
-export const metadata = {
-  title: 'Our Menu — Hananee Café | Coffee, Food & Drinks',
-  description: 'Explore the full menu at Hananee Café. From artisan coffee and matcha to nasi lemak and pasta — fuel up at Kuching\'s trendiest F1-themed café.',
-};
+import ScrollReveal from '../components/ScrollReveal';
 
 const menuSections = [
   {
@@ -106,12 +104,18 @@ export default function MenuPage() {
           />
         </div>
         <div className={`container ${styles.menuHeroContent}`}>
-          <span className="f1-tag">Full Menu</span>
-          <h1 className={styles.menuHeroTitle}>Our Menu</h1>
-          <p className={styles.menuHeroDesc}>
-            From pole position espressos to victory lap desserts — 
-            every item engineered for taste perfection.
-          </p>
+          <ScrollReveal animation="fadeRight">
+            <span className="f1-tag">Full Menu</span>
+          </ScrollReveal>
+          <ScrollReveal animation="fadeLeft" delay={200}>
+            <h1 className={styles.menuHeroTitle}>Our Menu</h1>
+          </ScrollReveal>
+          <ScrollReveal animation="fadeUp" delay={400}>
+            <p className={styles.menuHeroDesc}>
+              From pole position espressos to victory lap desserts — 
+              every item engineered for taste perfection.
+            </p>
+          </ScrollReveal>
           <div className={styles.menuQuickNav}>
             {menuSections.map((section, i) => (
               <a key={i} href={`#${section.category.toLowerCase().replace(/\s+/g, '-')}`} className={styles.quickNavItem}>
@@ -131,39 +135,45 @@ export default function MenuPage() {
             id={section.category.toLowerCase().replace(/\s+/g, '-')}
             className={styles.menuSection}
           >
-            <div className={styles.menuSectionHeader}>
-              <div className={styles.menuSectionIcon}>{section.icon}</div>
-              <div>
-                <span className={styles.f1Label}>{section.f1Label}</span>
-                <h2 className={styles.menuSectionTitle}>{section.category}</h2>
+            <ScrollReveal animation="fadeUp">
+              <div className={styles.menuSectionHeader}>
+                <div className={styles.menuSectionIcon}>{section.icon}</div>
+                <div>
+                  <span className={styles.f1Label}>{section.f1Label}</span>
+                  <h2 className={styles.menuSectionTitle}>{section.category}</h2>
+                </div>
+                <div className={styles.menuSectionLine} />
               </div>
-              <div className={styles.menuSectionLine} />
-            </div>
+            </ScrollReveal>
 
             <div className={styles.menuGrid}>
               {section.items.map((item, j) => (
-                <div key={j} className={styles.menuItem}>
-                  <div className={styles.menuItemTop}>
-                    <h3 className={styles.menuItemName}>{item.name}</h3>
-                    <div className={styles.menuItemDots} />
-                    <span className={styles.menuItemPrice}>{item.price}</span>
+                <ScrollReveal key={j} animation="fadeUp" stagger={60} index={j}>
+                  <div className={styles.menuItem}>
+                    <div className={styles.menuItemTop}>
+                      <h3 className={styles.menuItemName}>{item.name}</h3>
+                      <div className={styles.menuItemDots} />
+                      <span className={styles.menuItemPrice}>{item.price}</span>
+                    </div>
+                    <p className={styles.menuItemDesc}>{item.desc}</p>
                   </div>
-                  <p className={styles.menuItemDesc}>{item.desc}</p>
-                </div>
+                </ScrollReveal>
               ))}
             </div>
           </section>
         ))}
 
         {/* Note */}
-        <div className={styles.menuNote}>
-          <div className={styles.menuNoteIcon}>ℹ️</div>
-          <div>
-            <strong>Please note:</strong> Prices shown are approximate. Menu items and pricing may vary. 
-            All food is prepared fresh. Please inform our staff of any dietary requirements or allergies. 
-            Dine-in, takeaway, and delivery available.
+        <ScrollReveal animation="fadeUp">
+          <div className={styles.menuNote}>
+            <div className={styles.menuNoteIcon}>ℹ️</div>
+            <div>
+              <strong>Please note:</strong> Prices shown are approximate. Menu items and pricing may vary. 
+              All food is prepared fresh. Please inform our staff of any dietary requirements or allergies. 
+              Dine-in, takeaway, and delivery available.
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </div>
   );

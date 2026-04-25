@@ -161,6 +161,9 @@ button {
   color: var(--text-secondary);
   max-width: 600px;
   font-weight: 300;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 .f1-tag {
@@ -387,6 +390,38 @@ button {
   100% { transform: translateX(200%); }
 }
 
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes tiltIn {
+  from {
+    opacity: 0;
+    transform: perspective(500px) rotateY(-10deg) translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(500px) rotateY(0deg) translateX(0);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(74, 122, 63, 0.2); }
+  50% { box-shadow: 0 0 24px rgba(74, 122, 63, 0.5); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
 .animate-fade-up {
   animation: fadeInUp 0.8s var(--ease-smooth) forwards;
 }
@@ -405,6 +440,16 @@ button {
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 25%, rgba(255,255,255,0.1) 50%, transparent 75%);
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+.animate-glow {
+  animation: glowPulse 2s ease-in-out infinite;
 }
 
 .delay-100 { animation-delay: 0.1s; }
