@@ -233,9 +233,14 @@
   font-weight: 500;
   font-size: 1.05rem;
   color: var(--text-secondary);
-  transition: all var(--duration-fast) var(--ease-smooth);
-  animation: fadeInRight 0.4s var(--ease-smooth) forwards;
   opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.4s var(--ease-smooth), transform 0.4s var(--ease-smooth), background var(--duration-fast), color var(--duration-fast);
+}
+
+.mobileMenu.mobileOpen .mobileLink {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .mobileLink:hover {
@@ -277,9 +282,15 @@
   border-radius: var(--radius-full);
   text-decoration: none;
   box-shadow: var(--shadow-md), var(--shadow-glow-red);
-  transition: all var(--duration-normal) var(--ease-smooth);
-  animation: fadeInUp 0.5s var(--ease-smooth) 0.4s forwards;
   opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth), box-shadow var(--duration-normal);
+}
+
+.mobileMenu.mobileOpen .mobileCTA {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.4s;
 }
 
 .mobileCTA:hover {
