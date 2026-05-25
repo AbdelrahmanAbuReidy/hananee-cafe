@@ -4,6 +4,7 @@ import styles from './page.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import ScrollReveal from './components/ScrollReveal';
+import LatestPosters from './components/LatestPosters';
 
 export default function Home() {
   return (
@@ -84,6 +85,9 @@ export default function Home() {
           <span>Scroll to explore</span>
         </div>
       </section>
+
+      {/* ======= LATEST POSTERS (from Instagram) — first content after Hero ======= */}
+      <LatestPosters />
 
       {/* ======= FEATURED DRINKS ======= */}
       <section className={`section ${styles.featured}`}>

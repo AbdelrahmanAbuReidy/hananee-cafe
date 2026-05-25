@@ -5,3 +5,10 @@ build/
 .env*
 *.log
 .DS_Store
+
+# Local tooling — never commit secrets / machine-specific state
+.claude/settings.local.json
+.claude/projects/
+.claude/memory/
+.mcp.json
+.vercel/

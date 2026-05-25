@@ -1,0 +1,74 @@
+.btn {
+  position: fixed;
+  right: 20px;
+  /* Desktop: sit in the corner naturally (no FloatingWhatsApp at >900px). */
+  bottom: 24px;
+  z-index: 990;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-600), var(--green-700));
+  color: white;
+  box-shadow: var(--shadow-lg), var(--shadow-glow-green);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  opacity: 0;
+  transform: translateY(20px) scale(0.85);
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--ease-smooth),
+    transform var(--duration-normal) var(--ease-bounce),
+    background var(--duration-fast) var(--ease-smooth),
+    box-shadow var(--duration-fast) var(--ease-smooth);
+}
+
+.btn.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, var(--f1-red), var(--f1-red-dark));
+  box-shadow: var(--shadow-xl), var(--shadow-glow-red);
+  transform: translateY(-4px) scale(1.05);
+}
+
+.btn:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.arrow {
+  font-size: 1.3rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.label {
+  font-family: var(--font-f1);
+  font-size: 0.55rem;
+  letter-spacing: 1.5px;
+}
+
+/* Lift above the FloatingWhatsApp pill (which is mobile-only at <=900px). */
+@media (max-width: 900px) {
+  .btn {
+    bottom: 96px;
+  }
+}
+
+@media (max-width: 768px) {
+  .btn {
+    right: 14px;
+    bottom: 90px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .arrow {
+    font-size: 1.1rem;
+  }
+}

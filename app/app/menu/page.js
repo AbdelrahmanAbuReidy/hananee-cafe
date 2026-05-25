@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import styles from './page.module.css';
 import Image from 'next/image';
 import ScrollReveal from '../components/ScrollReveal';
@@ -88,8 +89,37 @@ const menuSections = [
 ];
 
 export default function MenuPage() {
+  const [showStickyNav, setShowStickyNav] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowStickyNav(window.scrollY > 500);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <div className={styles.menuPage}>
+      {/* Floating section nav (visible after hero) */}
+      <div
+        className={`${styles.stickyNav} ${showStickyNav ? styles.stickyVisible : ''}`}
+        aria-hidden={!showStickyNav}
+      >
+        <div className={styles.stickyNavInner}>
+          {menuSections.map((section) => (
+            <a
+              key={section.category}
+              href={`#${section.category.toLowerCase().replace(/\s+/g, '-')}`}
+              className={styles.stickyNavItem}
+              tabIndex={showStickyNav ? 0 : -1}
+            >
+              <span aria-hidden="true">{section.icon}</span>
+              <span className={styles.stickyNavLabel}>{section.category}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
       {/* Menu Hero */}
       <section className={styles.menuHero}>
         <div className={styles.menuHeroOverlay} />
@@ -117,9 +147,9 @@ export default function MenuPage() {
             </p>
           </ScrollReveal>
           <div className={styles.menuQuickNav}>
-            {menuSections.map((section, i) => (
-              <a key={i} href={`#${section.category.toLowerCase().replace(/\s+/g, '-')}`} className={styles.quickNavItem}>
-                <span>{section.icon}</span>
+            {menuSections.map((section) => (
+              <a key={section.category} href={`#${section.category.toLowerCase().replace(/\s+/g, '-')}`} className={styles.quickNavItem}>
+                <span aria-hidden="true">{section.icon}</span>
                 <span>{section.category}</span>
               </a>
             ))}
@@ -129,9 +159,9 @@ export default function MenuPage() {
 
       {/* Menu Sections */}
       <div className={`container ${styles.menuContent}`}>
-        {menuSections.map((section, i) => (
+        {menuSections.map((section) => (
           <section
-            key={i}
+            key={section.category}
             id={section.category.toLowerCase().replace(/\s+/g, '-')}
             className={styles.menuSection}
           >
@@ -148,11 +178,11 @@ export default function MenuPage() {
 
             <div className={styles.menuGrid}>
               {section.items.map((item, j) => (
-                <ScrollReveal key={j} animation="fadeUp" stagger={60} index={j}>
+                <ScrollReveal key={item.name} animation="fadeUp" stagger={60} index={j}>
                   <div className={styles.menuItem}>
                     <div className={styles.menuItemTop}>
                       <h3 className={styles.menuItemName}>{item.name}</h3>
-                      <div className={styles.menuItemDots} />
+                      <div className={styles.menuItemDots} aria-hidden="true" />
                       <span className={styles.menuItemPrice}>{item.price}</span>
                     </div>
                     <p className={styles.menuItemDesc}>{item.desc}</p>

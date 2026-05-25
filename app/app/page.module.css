@@ -755,11 +755,18 @@
   }
 
   .heroStats {
-    flex-wrap: wrap;
-    gap: var(--space-lg);
+    width: 100%;
+    justify-content: space-between;
+    gap: var(--space-md);
   }
 
   .heroDivider {
+    display: none;
+  }
+
+  /* Hide the F1 badge on mobile — it collides with the small image when the
+     about grid collapses to 1 column. */
+  .aboutBadge {
     display: none;
   }
 

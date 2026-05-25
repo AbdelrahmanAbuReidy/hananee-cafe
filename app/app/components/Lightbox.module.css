@@ -1,0 +1,158 @@
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: fadeIn 0.3s var(--ease-smooth);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.image {
+  position: relative;
+  width: 80vw;
+  height: 80vh;
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--duration-fast), transform var(--duration-fast);
+}
+
+.close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05);
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3rem;
+  color: white;
+  cursor: pointer;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 60px;
+  height: 80px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--duration-fast), transform var(--duration-fast);
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+.prev:hover,
+.next:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.prev:active,
+.next:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.caption {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: white;
+  max-width: 90%;
+}
+
+.caption span {
+  font-family: var(--font-f1);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  color: var(--f1-red);
+}
+
+.caption p {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-top: 4px;
+}
+
+.hint {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.7rem;
+  color: var(--cream-400);
+  letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+  .image {
+    width: 95vw;
+    height: 65vh;
+  }
+
+  .close {
+    top: 14px;
+    right: 14px;
+    width: 42px;
+    height: 42px;
+    font-size: 1.4rem;
+  }
+
+  .prev,
+  .next {
+    width: 48px;
+    height: 64px;
+    font-size: 2rem;
+  }
+
+  .prev {
+    left: 6px;
+  }
+
+  .next {
+    right: 6px;
+  }
+
+  .caption {
+    bottom: 14px;
+  }
+
+  .caption p {
+    font-size: 1rem;
+  }
+}

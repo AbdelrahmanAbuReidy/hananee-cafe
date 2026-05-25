@@ -137,10 +137,15 @@
 .hamburger {
   display: none;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 5px;
   padding: 8px;
   cursor: pointer;
   z-index: 1010;
+  /* Meets 44px tap target. */
+  min-width: 44px;
+  min-height: 44px;
 }
 
 .hamburger span {
@@ -296,6 +301,33 @@
 .mobileCTA:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg), var(--shadow-glow-red);
+}
+
+.mobileSecondary {
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  padding: 14px;
+  background: transparent;
+  color: var(--green-700);
+  border: 2px solid var(--green-300);
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s var(--ease-smooth), transform 0.5s var(--ease-smooth), background var(--duration-fast);
+}
+
+.mobileMenu.mobileOpen .mobileSecondary {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.5s;
+}
+
+.mobileSecondary:hover {
+  background: var(--green-50);
 }
 
 .mobileOverlay {

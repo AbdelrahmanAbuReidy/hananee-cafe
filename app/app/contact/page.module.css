@@ -132,13 +132,15 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
+  padding: 12px 16px;
   border-radius: var(--radius-md);
   background: var(--surface-warm);
   font-size: 0.9rem;
   color: var(--text-secondary);
   transition: all var(--duration-fast) var(--ease-smooth);
   text-decoration: none;
+  /* 44px tap target. */
+  min-height: 44px;
 }
 
 .contactLink:hover {
@@ -266,4 +268,19 @@
 @media (max-width: 768px) {
   .infoGrid { grid-template-columns: 1fr; }
   .servicesGrid { grid-template-columns: 1fr; }
+
+  .contactLinks {
+    gap: 10px;
+  }
+
+  /* Shorter map on mobile so the iframe doesn't dominate the viewport. */
+  .mapEmbed iframe {
+    height: 320px !important;
+  }
+
+  /* Stack the map action buttons so each is comfortably tappable. */
+  .mapActions .btn,
+  .mapActions a {
+    width: 100%;
+  }
 }

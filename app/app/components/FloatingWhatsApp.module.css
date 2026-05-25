@@ -1,0 +1,100 @@
+.fab {
+  position: fixed;
+  left: 20px;
+  bottom: 24px;
+  z-index: 990;
+  display: none; /* Mobile-only — re-enables at <=900px */
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px 12px 14px;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: white;
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4), 0 2px 8px rgba(0, 0, 0, 0.15);
+  font-family: var(--font-primary);
+  text-decoration: none;
+  transition: transform var(--duration-normal) var(--ease-bounce),
+    box-shadow var(--duration-fast) var(--ease-smooth);
+}
+
+.fab:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.55), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.fab:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.fab svg {
+  flex-shrink: 0;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.label strong {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.label small {
+  font-size: 0.7rem;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+.pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: var(--radius-full);
+  border: 2px solid #25d366;
+  opacity: 0;
+  pointer-events: none;
+  animation: fabPulse 2.2s ease-out infinite;
+}
+
+@keyframes fabPulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.15);
+  }
+}
+
+/* Show on mobile only — desktop has the inline "Order Now" button in the navbar */
+@media (max-width: 900px) {
+  .fab {
+    display: inline-flex;
+  }
+}
+
+/* On the smallest screens, stay icon-only from the start so the pill doesn't
+   collide with the centered hero scroll indicator. */
+@media (max-width: 480px) {
+  .fab {
+    padding: 12px;
+  }
+
+  .fab .label {
+    display: none;
+  }
+
+  .fab svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+  }
+}
