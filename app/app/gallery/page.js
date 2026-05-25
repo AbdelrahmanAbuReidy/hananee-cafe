@@ -1,17 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Image from 'next/image';
 import styles from './page.module.css';
 import ScrollReveal from '../components/ScrollReveal';
+import Lightbox from '../components/Lightbox';
 
 const galleryItems = [
-  { src: '/hero-interior.png', alt: 'F1 Themed Interior', category: 'Interior', caption: 'Racing vibes in every corner' },
-  { src: '/coffee-latte.png', alt: 'Artisan Coffee Latte', category: 'Drinks', caption: 'Handcrafted latte art' },
-  { src: '/food-spread.png', alt: 'Food Selection', category: 'Food', caption: 'Delicious food spread' },
-  { src: '/cafe-ambiance.png', alt: 'Cafe Ambiance', category: 'Interior', caption: 'Cozy study & chill spot' },
-  { src: '/drinks-specialty.png', alt: 'Specialty Drinks', category: 'Drinks', caption: 'Iced matcha & coffee' },
-  { src: '/cafe-exterior.png', alt: 'Cafe Exterior', category: 'Exterior', caption: 'Our welcoming facade' },
+  { src: '/hero-interior.png', alt: 'F1 themed interior with checkered patterns and racing memorabilia', category: 'Interior', caption: 'Racing vibes in every corner' },
+  { src: '/coffee-latte.png', alt: 'Handcrafted latte with intricate latte art', category: 'Drinks', caption: 'Handcrafted latte art' },
+  { src: '/food-spread.png', alt: 'Spread of pasta, nasi lemak and other dishes from Hananee Café', category: 'Food', caption: 'Delicious food spread' },
+  { src: '/cafe-ambiance.png', alt: 'Warm interior ambiance with cozy seating, perfect for studying', category: 'Interior', caption: 'Cozy study & chill spot' },
+  { src: '/drinks-specialty.png', alt: 'Specialty iced matcha and signature coffee drinks', category: 'Drinks', caption: 'Iced matcha & coffee' },
+  { src: '/cafe-exterior.png', alt: 'Welcoming exterior of Hananee Café on Jalan Simpang Tiga', category: 'Exterior', caption: 'Our welcoming facade' },
 ];
 
 const categories = ['All', 'Interior', 'Drinks', 'Food', 'Exterior'];
@@ -22,12 +23,21 @@ export default function GalleryPage() {
 
   const filteredItems = activeCategory === 'All'
     ? galleryItems
-    : galleryItems.filter(item => item.category === activeCategory);
+    : galleryItems.filter((item) => item.category === activeCategory);
 
-  const openLightbox = (index) => setLightboxIndex(index);
-  const closeLightbox = () => setLightboxIndex(null);
-  const nextImage = () => setLightboxIndex(prev => (prev + 1) % filteredItems.length);
-  const prevImage = () => setLightboxIndex(prev => (prev - 1 + filteredItems.length) % filteredItems.length);
+  const closeLightbox = useCallback(() => setLightboxIndex(null), []);
+
+  const handleCategoryChange = (cat) => {
+    setActiveCategory(cat);
+    setLightboxIndex(null); // close lightbox if the filtered list changes under it
+  };
+
+  const onItemKey = (e, index) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      setLightboxIndex(index);
+    }
+  };
 
   return (
     <div className={styles.galleryPage}>
@@ -35,11 +45,11 @@ export default function GalleryPage() {
       <section className={styles.galleryHero}>
         <div className={styles.galleryHeroOverlay} />
         <div className={styles.galleryHeroImage}>
-          <Image 
-            src="/cafe-ambiance.png" 
-            alt="Hananee Cafe Gallery" 
-            fill 
-            priority 
+          <Image
+            src="/cafe-ambiance.png"
+            alt=""
+            fill
+            priority
             style={{ objectFit: 'cover' }}
             sizes="100vw"
           />
@@ -53,7 +63,7 @@ export default function GalleryPage() {
           </ScrollReveal>
           <ScrollReveal animation="fadeUp" delay={400}>
             <p className={styles.galleryHeroDesc}>
-              Every corner of Hananee is designed to be photogenic. Explore our F1-inspired 
+              Every corner of Hananee is designed to be photogenic. Explore our F1-inspired
               interiors, artisan drinks, and delicious food — your phone shoots content on its own. 📸
             </p>
           </ScrollReveal>
@@ -65,32 +75,41 @@ export default function GalleryPage() {
         <div className="container">
           {/* Category Filters */}
           <ScrollReveal animation="fadeDown">
-            <div className={styles.filterBar}>
-              {categories.map(cat => (
-                <button
-                  key={cat}
-                  className={`${styles.filterBtn} ${activeCategory === cat ? styles.filterActive : ''}`}
-                  onClick={() => setActiveCategory(cat)}
-                >
-                  {cat}
-                </button>
-              ))}
+            <div className={styles.filterBar} role="tablist" aria-label="Filter gallery by category">
+              {categories.map((cat) => {
+                const isActive = activeCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    className={`${styles.filterBtn} ${isActive ? styles.filterActive : ''}`}
+                    onClick={() => handleCategoryChange(cat)}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
             </div>
           </ScrollReveal>
 
           {/* Gallery Grid */}
           <div className={styles.galleryGrid}>
             {filteredItems.map((item, i) => (
-              <ScrollReveal key={i} animation="scaleUp" stagger={80} index={i}>
-                <div
+              <ScrollReveal key={`${item.src}-${i}`} animation="scaleUp" stagger={80} index={i}>
+                <button
+                  type="button"
                   className={styles.galleryItem}
-                  onClick={() => openLightbox(i)}
+                  onClick={() => setLightboxIndex(i)}
+                  onKeyDown={(e) => onItemKey(e, i)}
+                  aria-label={`Open ${item.caption} in full view`}
                 >
                   <div className={styles.galleryImageWrapper}>
-                    <Image 
-                      src={item.src} 
-                      alt={item.alt} 
-                      fill 
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
                       style={{ objectFit: 'cover' }}
                       sizes="(max-width: 768px) 100vw, 33vw"
                     />
@@ -100,7 +119,7 @@ export default function GalleryPage() {
                       <span className={styles.galleryView}>🔍 View Full</span>
                     </div>
                   </div>
-                </div>
+                </button>
               </ScrollReveal>
             ))}
           </div>
@@ -108,10 +127,10 @@ export default function GalleryPage() {
           {/* Instagram CTA */}
           <ScrollReveal animation="fadeUp" delay={200}>
             <div className={styles.instaCTA}>
-              <div className={styles.instaIcon}>📸</div>
+              <div className={styles.instaIcon} aria-hidden="true">📸</div>
               <h3 className={styles.instaTitle}>See More on Instagram</h3>
               <p className={styles.instaDesc}>
-                Follow <strong>@hananeecafe</strong> for daily updates, behind-the-scenes, 
+                Follow <strong>@hananeecafe</strong> for daily updates, behind-the-scenes,
                 and new menu drops.
               </p>
               <a
@@ -127,27 +146,12 @@ export default function GalleryPage() {
         </div>
       </section>
 
-      {/* Lightbox */}
-      {lightboxIndex !== null && (
-        <div className={styles.lightbox} onClick={closeLightbox}>
-          <button className={styles.lightboxClose} onClick={closeLightbox}>✕</button>
-          <button className={styles.lightboxPrev} onClick={(e) => { e.stopPropagation(); prevImage(); }}>‹</button>
-          <div className={styles.lightboxImage} onClick={(e) => e.stopPropagation()}>
-            <Image 
-              src={filteredItems[lightboxIndex].src} 
-              alt={filteredItems[lightboxIndex].alt}
-              fill
-              style={{ objectFit: 'contain' }}
-              sizes="90vw"
-            />
-          </div>
-          <button className={styles.lightboxNext} onClick={(e) => { e.stopPropagation(); nextImage(); }}>›</button>
-          <div className={styles.lightboxCaption}>
-            <span>{filteredItems[lightboxIndex].category}</span>
-            <p>{filteredItems[lightboxIndex].caption}</p>
-          </div>
-        </div>
-      )}
+      <Lightbox
+        items={filteredItems}
+        activeIndex={lightboxIndex}
+        onClose={closeLightbox}
+        onNavigate={setLightboxIndex}
+      />
     </div>
   );
 }

@@ -89,11 +89,26 @@
   border-radius: var(--radius-lg);
   overflow: hidden;
   transition: all var(--duration-normal) var(--ease-smooth);
+  /* Button reset — was a div before; keep visual style identical */
+  width: 100%;
+  padding: 0;
+  background: none;
+  border: none;
+  font: inherit;
+  text-align: inherit;
+  color: inherit;
+  display: block;
 }
 
-.galleryItem:hover {
+.galleryItem:hover,
+.galleryItem:focus-visible {
   transform: scale(1.02);
   box-shadow: var(--shadow-xl);
+}
+
+.galleryItem:focus-visible {
+  outline: 3px solid var(--f1-red);
+  outline-offset: 4px;
 }
 
 .galleryImageWrapper {
@@ -149,102 +164,11 @@
 .instaTitle { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: var(--space-sm); }
 .instaDesc { font-size: 1rem; color: var(--text-secondary); margin-bottom: var(--space-xl); }
 
-/* ======= LIGHTBOX ======= */
-.lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  background: rgba(0,0,0,0.92);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  backdrop-filter: blur(10px);
-  animation: fadeIn 0.3s var(--ease-smooth);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.lightboxImage {
-  position: relative;
-  width: 80vw;
-  height: 70vh;
-}
-
-.lightboxClose {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-  z-index: 10;
-  background: none;
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background var(--duration-fast);
-}
-
-.lightboxClose:hover { background: rgba(255,255,255,0.1); }
-
-.lightboxPrev,
-.lightboxNext {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 3rem;
-  color: white;
-  cursor: pointer;
-  z-index: 10;
-  background: rgba(255,255,255,0.05);
-  border: none;
-  width: 60px;
-  height: 80px;
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background var(--duration-fast);
-}
-
-.lightboxPrev { left: 20px; }
-.lightboxNext { right: 20px; }
-.lightboxPrev:hover,
-.lightboxNext:hover { background: rgba(255,255,255,0.15); }
-
-.lightboxCaption {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  color: white;
-}
-
-.lightboxCaption span {
-  font-family: var(--font-f1);
-  font-size: 0.7rem;
-  letter-spacing: 2px;
-  color: var(--f1-red);
-}
-
-.lightboxCaption p {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  margin-top: 4px;
-}
+/* Lightbox styles now live in components/Lightbox.module.css (shared with LatestPosters). */
 
 /* ======= RESPONSIVE ======= */
 @media (max-width: 768px) {
   .galleryGrid { grid-template-columns: 1fr; }
   .galleryImageWrapper { height: 250px; }
   .galleryItemOverlay { opacity: 1; }
-  .lightboxImage { width: 95vw; height: 60vh; }
 }

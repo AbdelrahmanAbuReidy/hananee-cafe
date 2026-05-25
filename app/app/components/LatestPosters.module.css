@@ -1,0 +1,219 @@
+.section {
+  padding: var(--space-4xl) 0;
+  background: var(--background);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle checkered-flag accent in the corner */
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -20px;
+  width: 220px;
+  height: 220px;
+  background-image:
+    linear-gradient(45deg, var(--brown-200) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--brown-200) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--brown-200) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--brown-200) 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+  opacity: 0.18;
+  border-bottom-left-radius: 100%;
+  pointer-events: none;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-3xl);
+}
+
+.header .section-title {
+  margin-top: var(--space-md);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-xl);
+  position: relative;
+  z-index: 1;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--duration-normal) var(--ease-smooth),
+    box-shadow var(--duration-normal) var(--ease-smooth),
+    border-color var(--duration-normal) var(--ease-smooth);
+  box-shadow: var(--shadow-sm);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--green-300);
+}
+
+/* Image button — resets default button styling, full-bleed */
+.imageButton {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  font: inherit;
+  text-align: inherit;
+  color: inherit;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.imageButton:focus-visible {
+  outline: 3px solid var(--f1-red);
+  outline-offset: -3px;
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  /* 4:5 portrait — matches Instagram poster aspect roughly. */
+  aspect-ratio: 4 / 5;
+  background: var(--cream-200);
+  overflow: hidden;
+}
+
+.imageWrap img {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.card:hover .imageWrap img,
+.imageButton:focus-visible .imageWrap img {
+  transform: scale(1.05) !important;
+}
+
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: var(--space-md);
+  background: linear-gradient(transparent 55%, rgba(26, 45, 22, 0.78));
+  opacity: 0;
+  transition: opacity var(--duration-normal) var(--ease-smooth);
+}
+
+.card:hover .imageOverlay,
+.imageButton:focus-visible .imageOverlay {
+  opacity: 1;
+}
+
+.zoomChip {
+  font-family: var(--font-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: var(--font-f1);
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: white;
+  background: linear-gradient(135deg, var(--f1-red), var(--f1-red-dark));
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  z-index: 2;
+}
+
+.body {
+  padding: var(--space-lg) var(--space-xl) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  flex: 1;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.caption {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.cta {
+  align-self: flex-start;
+  padding: 10px 20px;
+  font-size: 0.85rem;
+}
+
+/* Section footer (Follow CTA) */
+.footer {
+  margin-top: var(--space-3xl);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.followCopy {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 480px;
+}
+
+/* === Responsive === */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .section::before {
+    width: 140px;
+    height: 140px;
+  }
+
+  /* On touch devices the overlay is always visible (no hover). */
+  .imageOverlay {
+    opacity: 1;
+    background: linear-gradient(transparent 70%, rgba(26, 45, 22, 0.6));
+  }
+
+  .imageWrap {
+    aspect-ratio: 4 / 5;
+  }
+}

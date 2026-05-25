@@ -1,0 +1,64 @@
+---
+description: Index of project-specific Cursor customization in the Hananee Café repo. Always loaded so the AI knows what tools are available.
+alwaysApply: true
+---
+
+# Project Cursor customization (Hananee Café)
+
+Hananee Café is a five-page F1-themed café marketing site (Home, Menu, About, Gallery, Contact) in Kuching, Sarawak, Malaysia. Next.js 16 App Router, React 19, **JavaScript** (no TypeScript), CSS Modules + global helpers in `globals.css`, custom `<ScrollReveal>` IntersectionObserver animations, WhatsApp (`wa.me/60109203889`) as the only outbound action. No backend, no auth, no i18n, no multi-currency.
+
+**Repo layout quirk:** the Next.js project lives in `app/`, not at the repo root. All commands run from `app/` (`cd app && npm run dev | build | start | lint`).
+
+This repo has two surfaces:
+
+- **Slash commands** in `.cursor/commands/` — invoked with `/<name>` (one-shot procedural templates: scaffolders, the senior-eng-review gate)
+- **Rules** in `.cursor/rules/` — invoked with `@<name>` or auto-attached by description (read-only review specialists)
+
+## Final gate (run before declaring any change done)
+- `/senior-eng-review` — end-to-end review with persona-aware tone (intern / junior / senior). Triages findings (Blockers / Strongly recommended / Polish). Pass `Invoker level: <intern | junior | senior>` in your message.
+
+## Slash commands (builders / scaffolders)
+- `/phase-implementer` — implement a frontend feature end-to-end on the Hananee Café site
+- `/parallel-batch` — fan out 2–5 unrelated independent tasks concurrently
+- `/add-route` — add a new App Router route under `app/app/<slug>/`
+- `/run-checks` — `npm run lint` from `app/` (no `tsc`, no tests — lint is the only static gate)
+
+## Reviewers (read-only — return findings via `@<name>`)
+- `@ui-ux-reviewer` — global helper class usage, `<ScrollReveal>` discipline, F1 brand voice, breakpoints (375 / 768 / 1280+), accessibility, image handling, WhatsApp CTA consistency
+- `@code-quality-reviewer` — RSC vs client boundaries, hooks discipline, CSS-Modules vs global pattern, JS style
+- `@bug-reviewer` — Rules of Hooks, missing deps, missing cleanups, broken `<Image>` props, IntersectionObserver edge cases
+- `@security-reviewer` — XSS, secrets, third-party scripts, `dangerouslySetInnerHTML` (note: there's no auth or PII surface in this app)
+- `@no-ai-jargon-reuse-reviewer` — AI-cruft cleanup + duplication consolidation (same section pasted across pages, repeated WhatsApp button copy, etc.)
+- `@phase-reviewer` — gap report against a brief / spec
+- `@qa-agent` — manual QA checklist across the 5 pages + the three breakpoints
+- `_index` — this file (always-loaded)
+
+All reviewers are persona-aware — pass `Invoker level: <intern | junior | senior>` and they tune their tone (intern = teaching with WHY lines; senior = terse).
+
+## Project skills (Cursor)
+
+`.cursor/skills/` is empty in this project — the equivalent design-intelligence skill (`ui-ux-pro-max`) lives only under `.claude/skills/`.
+
+## Hananee Café conventions to enforce
+
+- Default to Server Components; add `"use client"` only when the component needs state, effects, refs, browser APIs, or wraps `<ScrollReveal>`. `Navbar.js` and the home `page.js` are client; `Footer.js` is server.
+- Component styles use per-component CSS Modules (`<Name>.module.css`). Global helper classes live in `app/app/globals.css`: `.container`, `.section`, `.section-title`, `.section-subtitle`, `.btn`, `.btn-primary`, `.btn-secondary`, `.btn-accent`, `.f1-tag`, `.stars`.
+- Tailwind v4 is wired through `@tailwindcss/postcss` but used **only inside `globals.css`** — do NOT sprinkle Tailwind classes across JSX `className` props.
+- Animation is the custom `<ScrollReveal>` at `app/app/components/ScrollReveal.js`. Variants: `fadeUp`, `fadeDown`, `fadeLeft`, `fadeRight`, `scaleUp`, `rotateIn`, `flipUp`, `slideReveal`, `zoomFade`. Do NOT introduce framer-motion / GSAP / AOS.
+- Images go through `next/image` from `app/public/`. Remote hosts must be added to `images.remotePatterns` in `next.config.mjs`.
+- WhatsApp CTA: `https://wa.me/60109203889` everywhere. Address: Lot 8155 & 8156, Section 64, Jalan Simpang Tiga, Kuching. Socials: IG `@hananeecafe`, FB id `61581697183774`. Keep all four in sync across `Navbar.js`, `Footer.js`, `page.js`, and `contact/page.js`.
+- F1 / racing brand voice (🏎️ 🏁, "pit stop", "winning lap", "start your engines", racing-stripe accents) is part of the product — don't sanitize it into generic café marketing.
+- SEO: export `metadata` from each route's `layout.js` (or the root for the home page).
+- Project is JavaScript-only — don't add TypeScript files.
+- No backend / no API. `@supabase/supabase-js` is in `package.json` but unused; don't start importing it without an explicit decision.
+- Next.js 16 is post-training for the model — read `app/node_modules/next/dist/docs/` before using any API you're unsure about (see `app/AGENTS.md`).
+
+## Want true parallel async reviewers? Configure Cloud Agents
+
+Cursor's Cloud Agents (formerly Background Agents) run async in cloud workers — the file-based `.cursor/rules/` here are sequential. To get parallel async behaviour for the reviewers (e.g. fan out 3 reviewers on a PR), open Cursor → Cloud Agents settings → create an agent for each reviewer and paste the corresponding `.cursor/rules/<name>.mdc` body as the system prompt. That setup is one-time per agent and is not tracked by these files.
+
+## Conventions
+
+- Local commands: `cd app && npm run dev | build | start | lint` (no Docker, no test runner, no `tsc` — project is JavaScript).
+- Match the file you're editing — `*.module.css` for component-scoped CSS, global helper classes from `globals.css` for layout / buttons / typography.
+- Never commit `.mcp.json` or `.claude/settings.local.json` (both should remain gitignored — the user-scope `~/.claude.json` carries a GitHub PAT and the Stitch key).

@@ -81,9 +81,97 @@
   transform: translateY(-2px);
 }
 
+/* ======= STICKY SECTION NAV (appears after hero) ======= */
+.stickyNav {
+  position: fixed;
+  /* Sits flush below the scrolled Navbar (~68px tall once .scrolled is active). */
+  top: 68px;
+  left: 0;
+  right: 0;
+  z-index: 900;
+  background: rgba(254, 253, 248, 0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform var(--duration-normal) var(--ease-smooth),
+    opacity var(--duration-normal) var(--ease-smooth);
+}
+
+.stickyVisible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.stickyNavInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 8px var(--space-xl);
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+}
+
+.stickyNavInner::-webkit-scrollbar {
+  display: none;
+}
+
+.stickyNavItem {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  background: var(--green-50);
+  border: 1px solid transparent;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  transition: all var(--duration-fast) var(--ease-smooth);
+  text-decoration: none;
+}
+
+.stickyNavItem:hover,
+.stickyNavItem:focus-visible {
+  background: var(--green-500);
+  color: white;
+  border-color: var(--green-500);
+  transform: translateY(-1px);
+}
+
+.stickyNavLabel {
+  font-family: inherit;
+}
+
+@media (max-width: 768px) {
+  .stickyNav {
+    top: 68px;
+  }
+
+  .stickyNavInner {
+    padding: 8px var(--space-md);
+  }
+
+  .stickyNavItem {
+    /* Meets 44px tap target for fingers. */
+    font-size: 0.82rem;
+    padding: 12px 14px;
+    min-height: 44px;
+  }
+}
+
 /* ======= MENU CONTENT ======= */
 .menuContent {
-  padding: var(--space-3xl) var(--space-xl);
+  /* Horizontal padding is supplied by .container; only add vertical here. */
+  padding: var(--space-3xl) 0;
 }
 
 .menuSection {
@@ -164,7 +252,7 @@
   font-size: 1.05rem;
   color: var(--text-primary);
   font-weight: 600;
-  white-space: nowrap;
+  /* Allow wrapping on small screens to prevent overflow with long names. */
 }
 
 .menuItemDots {
