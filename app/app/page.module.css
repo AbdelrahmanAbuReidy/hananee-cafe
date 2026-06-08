@@ -2,6 +2,9 @@
 .hero {
   position: relative;
   min-height: 100vh;
+  /* svh = small viewport height: stays constant while the mobile URL bar
+     collapses, so the hero doesn't grow/shrink (and jump the page) on scroll. */
+  min-height: 100svh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -18,8 +21,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transform: scale(1.05);
-  /* Slight scale to avoid edge artifacts */
+  /* object-fit:cover already fills the box with no edges — no scale needed.
+     A scale() here pushed the video a few px past the viewport edges. */
 }
 
 .heroImage::after {
@@ -460,7 +463,14 @@
 
 .feature:hover {
   background: var(--green-50);
-  transform: translateX(4px);
+}
+
+/* Only nudge on real hover — on touch, :hover sticks after a tap and the
+   sideways shift looks broken. */
+@media (hover: hover) and (pointer: fine) {
+  .feature:hover {
+    transform: translateX(4px);
+  }
 }
 
 .featureIcon {
@@ -546,7 +556,12 @@
 .foodItem:hover {
   border-color: var(--green-300);
   box-shadow: var(--shadow-sm);
-  transform: translateX(4px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .foodItem:hover {
+    transform: translateX(4px);
+  }
 }
 
 .foodItemIcon {
@@ -756,12 +771,35 @@
 
   .heroStats {
     width: 100%;
-    justify-content: space-between;
-    gap: var(--space-md);
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-md) var(--space-lg);
+  }
+
+  .heroStat {
+    min-width: 0;
+  }
+
+  .statLabel {
+    font-size: 0.72rem;
   }
 
   .heroDivider {
     display: none;
+  }
+
+  /* Decorative; on short phones it collides with the hero stats. */
+  .scrollIndicator {
+    display: none;
+  }
+
+  /* Scale the overlapping preview image with the column instead of a fixed
+     200px box pinned to the right edge. */
+  .aboutImageSmall {
+    width: 45%;
+    height: auto;
+    aspect-ratio: 1;
+    max-width: 200px;
   }
 
   /* Hide the F1 badge on mobile — it collides with the small image when the

@@ -6,6 +6,8 @@
 .menuHero {
   position: relative;
   min-height: 60vh;
+  /* Stable height while the mobile URL bar collapses. */
+  min-height: 60svh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -237,7 +239,14 @@
 .menuItem:hover {
   border-color: var(--green-300);
   box-shadow: var(--shadow-sm);
-  transform: translateX(4px);
+}
+
+/* On a phone the card is full-width; a sticky tap :hover would push it 4px
+   past the edge. Only shift on real hover. */
+@media (hover: hover) and (pointer: fine) {
+  .menuItem:hover {
+    transform: translateX(4px);
+  }
 }
 
 .menuItemTop {
@@ -302,10 +311,21 @@
 
   .menuHero {
     min-height: 50vh;
+    min-height: 50svh;
   }
 
   .menuHeroTitle {
     font-size: clamp(2rem, 8vw, 3.5rem);
+  }
+
+  /* Tighten the section header so the decorative line doesn't collapse to
+     near-zero width next to the icon + wrapped title at 375px. */
+  .menuSectionHeader {
+    gap: 10px;
+  }
+
+  .menuSectionLine {
+    display: none;
   }
 
   .quickNavItem {

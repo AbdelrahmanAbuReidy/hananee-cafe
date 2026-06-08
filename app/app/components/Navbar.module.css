@@ -196,10 +196,15 @@
   width: 85%;
   max-width: 380px;
   height: 100vh;
+  /* dvh tracks the actual visible viewport so the panel + bottom CTAs aren't
+     cut off / don't jump as the mobile URL bar shows/hides. */
+  height: 100dvh;
   background: linear-gradient(180deg, var(--cream-50), var(--cream-100));
   z-index: 1005;
   transition: right var(--duration-normal) var(--ease-smooth);
   overflow-y: auto;
+  /* Keep a swipe inside the menu from scrolling the page behind it. */
+  overscroll-behavior: contain;
   box-shadow: -8px 0 32px rgba(0,0,0,0.15);
 }
 

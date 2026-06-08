@@ -5,6 +5,7 @@ import Image from 'next/image';
 import styles from './page.module.css';
 import ScrollReveal from '../components/ScrollReveal';
 import Lightbox from '../components/Lightbox';
+import { InstagramIcon } from '../components/BrandIcons';
 
 const galleryItems = [
   { src: '/hero-interior.png', alt: 'F1 themed interior with checkered patterns and racing memorabilia', category: 'Interior', caption: 'Racing vibes in every corner' },
@@ -127,7 +128,7 @@ export default function GalleryPage() {
           {/* Instagram CTA */}
           <ScrollReveal animation="fadeUp" delay={200}>
             <div className={styles.instaCTA}>
-              <div className={styles.instaIcon} aria-hidden="true">📸</div>
+              <div className={styles.instaIcon}><InstagramIcon size={48} gradient /></div>
               <h3 className={styles.instaTitle}>See More on Instagram</h3>
               <p className={styles.instaDesc}>
                 Follow <strong>@hananeecafe</strong> for daily updates, behind-the-scenes,
@@ -139,7 +140,7 @@ export default function GalleryPage() {
                 rel="noopener noreferrer"
                 className="btn btn-primary"
               >
-                Follow on Instagram →
+                <InstagramIcon size={18} /> Follow on Instagram
               </a>
             </div>
           </ScrollReveal>

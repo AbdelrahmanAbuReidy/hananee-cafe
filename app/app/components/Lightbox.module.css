@@ -9,6 +9,8 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   animation: fadeIn 0.3s var(--ease-smooth);
+  /* Don't chain overscroll to the page behind the lightbox. */
+  overscroll-behavior: contain;
 }
 
 @keyframes fadeIn {
@@ -23,7 +25,7 @@
 .image {
   position: relative;
   width: 80vw;
-  height: 80vh;
+  height: 80dvh;
 }
 
 .close {
@@ -122,7 +124,7 @@
 @media (max-width: 768px) {
   .image {
     width: 95vw;
-    height: 65vh;
+    height: 65dvh;
   }
 
   .close {

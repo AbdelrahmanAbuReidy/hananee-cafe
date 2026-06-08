@@ -107,6 +107,14 @@ html {
   -moz-osx-font-smoothing: grayscale;
   /* Reserve scrollbar gutter so mobile-menu scroll lock doesn't shift layout */
   scrollbar-gutter: stable;
+  /* Lock the horizontal axis at the real (root) scroll container. On mobile,
+     overflow-x on body alone is unreliable — the page could still be panned
+     sideways. `clip` is a hard clip that doesn't spawn a scroll container, so
+     it won't break the fixed navbar. */
+  overflow-x: clip;
+  /* Stop pull-to-refresh / elastic vertical bounce that reads as the page
+     "detaching" while finger-scrolling. */
+  overscroll-behavior-y: contain;
 }
 
 body {
@@ -114,14 +122,20 @@ body {
   background-color: var(--background);
   color: var(--text-primary);
   line-height: 1.7;
-  overflow-x: hidden;
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
+  overscroll-behavior-x: none;
   text-rendering: optimizeLegibility;
 }
 
-/* Lock body scroll when a modal/menu/lightbox is open */
+/* Lock body scroll when a modal/menu/lightbox is open.
+   NOTE: do NOT add `touch-action: none` here — it freezes the overlay's own
+   inner scrolling (mobile menu CTAs / lightbox caption become unreachable on
+   small phones). `overflow: hidden` already locks the page; the overlays use
+   `overscroll-behavior: contain` to stop scroll chaining to the page behind. */
 body.no-scroll {
   overflow: hidden;
-  touch-action: none;
 }
 
 a {

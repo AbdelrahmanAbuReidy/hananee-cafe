@@ -4,6 +4,8 @@
 .galleryHero {
   position: relative;
   min-height: 55vh;
+  /* Stable height while the mobile URL bar collapses. */
+  min-height: 55svh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -44,7 +46,8 @@
 }
 
 /* ======= GALLERY CONTENT ======= */
-.galleryContent { background: var(--background); }
+/* Clip the card scale/reveal transforms locally so they can't widen the page. */
+.galleryContent { background: var(--background); overflow-x: clip; }
 
 .filterBar {
   display: flex;
@@ -64,6 +67,11 @@
   border: 1px solid var(--border);
   cursor: pointer;
   transition: all var(--duration-fast) var(--ease-smooth);
+  /* 44px minimum tap target for fingers. */
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .filterBtn:hover {
@@ -104,6 +112,13 @@
 .galleryItem:focus-visible {
   transform: scale(1.02);
   box-shadow: var(--shadow-xl);
+}
+
+/* On touch, :hover sticks after a tap; don't leave the card scaled up. */
+@media (hover: none) {
+  .galleryItem:hover {
+    transform: none;
+  }
 }
 
 .galleryItem:focus-visible {
@@ -171,4 +186,6 @@
   .galleryGrid { grid-template-columns: 1fr; }
   .galleryImageWrapper { height: 250px; }
   .galleryItemOverlay { opacity: 1; }
+  /* 140px fixed top padding eats most of a short svh hero on a phone. */
+  .galleryHeroContent { padding-top: 110px; padding-bottom: var(--space-2xl); }
 }

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ScrollReveal from './ScrollReveal';
 import Lightbox from './Lightbox';
+import { InstagramIcon } from './BrandIcons';
 import styles from './LatestPosters.module.css';
 
 const posters = [
@@ -131,7 +132,7 @@ export default function LatestPosters() {
               rel="noopener noreferrer"
               className="btn btn-primary"
             >
-              📸 Follow @hananeecafe
+              <InstagramIcon size={18} /> Follow @hananeecafe
             </a>
           </div>
         </ScrollReveal>

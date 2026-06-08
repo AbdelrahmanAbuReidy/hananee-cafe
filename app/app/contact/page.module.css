@@ -4,6 +4,8 @@
 .contactHero {
   position: relative;
   min-height: 55vh;
+  /* Stable height while the mobile URL bar collapses. */
+  min-height: 55svh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -143,10 +145,25 @@
   min-height: 44px;
 }
 
+.contactLink svg {
+  flex-shrink: 0;
+}
+
+/* Real brand colors so the logos read as the actual apps. */
+.iconCall { color: var(--green-600); }
+.iconWhatsapp { color: #25d366; }
+.iconFacebook { color: #1877f2; }
+
 .contactLink:hover {
   background: var(--green-50);
   color: var(--green-700);
-  transform: translateX(4px);
+}
+
+/* Only nudge on real hover — on touch a tapped link would stay shifted. */
+@media (hover: hover) and (pointer: fine) {
+  .contactLink:hover {
+    transform: translateX(4px);
+  }
 }
 
 /* ======= MAP ======= */
@@ -268,6 +285,9 @@
 @media (max-width: 768px) {
   .infoGrid { grid-template-columns: 1fr; }
   .servicesGrid { grid-template-columns: 1fr; }
+
+  /* 140px fixed top padding eats most of a short svh hero on a phone. */
+  .contactHeroContent { padding-top: 110px; padding-bottom: var(--space-2xl); }
 
   .contactLinks {
     gap: 10px;

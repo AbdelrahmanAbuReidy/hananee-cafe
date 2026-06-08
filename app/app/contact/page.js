@@ -3,6 +3,7 @@
 import styles from './page.module.css';
 import Image from 'next/image';
 import ScrollReveal from '../components/ScrollReveal';
+import { InstagramIcon, FacebookIcon, WhatsAppIcon, PhoneIcon } from '../components/BrandIcons';
 
 export default function ContactPage() {
   return (
@@ -43,7 +44,7 @@ export default function ContactPage() {
             {[
               { icon: "📍", title: "Our Location", content: <><p>Lot 8155 & 8156, Section 64, KTLD,<br/>Jalan Simpang Tiga, Kampung Kenyalang Park,<br/>93200 Kuching, Sarawak, Malaysia</p><span className={styles.infoNote}>Beside Titik Temu • Near Swinburne University</span></> },
               { icon: "🕘", title: "Opening Hours", content: <><div className={styles.hoursTable}><div className={styles.hourRow}><span>Monday – Sunday</span><span className={styles.hourValue}>9 AM – 11 PM</span></div></div><span className={styles.infoNote}>🏎️ Open 7 days a week — pit stops welcome!</span></> },
-              { icon: "📞", title: "Get in Touch", content: <div className={styles.contactLinks}><a href="tel:+60109203889" className={styles.contactLink}>📞 +60 10-920 3889</a><a href="https://wa.me/60109203889" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>💬 WhatsApp Us</a><a href="https://www.instagram.com/hananeecafe/" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>📸 @hananeecafe</a><a href="https://www.facebook.com/p/Hananee-61581697183774/" target="_blank" rel="noopener noreferrer" className={styles.contactLink}>👤 Facebook Page</a></div> },
+              { icon: "📞", title: "Get in Touch", content: <div className={styles.contactLinks}><a href="tel:+60109203889" className={styles.contactLink}><PhoneIcon size={18} className={styles.iconCall} /> +60 10-920 3889</a><a href="https://wa.me/60109203889" target="_blank" rel="noopener noreferrer" className={styles.contactLink}><WhatsAppIcon size={18} className={styles.iconWhatsapp} /> WhatsApp Us</a><a href="https://www.instagram.com/hananeecafe/" target="_blank" rel="noopener noreferrer" className={styles.contactLink}><InstagramIcon size={18} gradient /> @hananeecafe</a><a href="https://www.facebook.com/p/Hananee-61581697183774/" target="_blank" rel="noopener noreferrer" className={styles.contactLink}><FacebookIcon size={18} className={styles.iconFacebook} /> Facebook Page</a></div> },
               { icon: "🅿️", title: "Parking", content: <><p>Free parking lot available with plenty of spaces. No worries about your ride while you enjoy your coffee! 🚗</p><span className={styles.infoNote}>Easy access from main road</span></> }
             ].map((info, i) => (
               <ScrollReveal key={i} animation="flipUp" stagger={100} index={i}>
@@ -141,8 +142,8 @@ export default function ContactPage() {
             <h2 className={styles.ctaTitle}>Ready to Visit?</h2>
             <p className={styles.ctaDesc}>Drop by anytime — we&apos;re here 7 days a week, serving the best coffee in Kuching!</p>
             <div className={styles.ctaActions}>
-              <a href="tel:+60109203889" className="btn btn-primary">📞 Call Us Now</a>
-              <a href="https://wa.me/60109203889" target="_blank" rel="noopener noreferrer" className="btn btn-accent">💬 WhatsApp</a>
+              <a href="tel:+60109203889" className="btn btn-primary"><PhoneIcon size={18} /> Call Us Now</a>
+              <a href="https://wa.me/60109203889" target="_blank" rel="noopener noreferrer" className="btn btn-accent"><WhatsAppIcon size={18} /> WhatsApp</a>
             </div>
           </div>
         </ScrollReveal>

@@ -1,9 +1,21 @@
 /* ======= ABOUT HERO ======= */
-.aboutPage { padding-top: 0; }
+/* overflow-x: clip contains the horizontal slide-in reveals (fadeRight/fadeLeft)
+   so the page can never be panned/rubber-banded sideways on a phone. This is the
+   page the owner reported as unstable while finger-scrolling. */
+.aboutPage { padding-top: 0; overflow-x: clip; }
+
+/* Belt-and-braces: clip each section locally so an in-flight ±50px reveal
+   transform never creates a pannable strip. */
+.originSection,
+.valuesSection,
+.experienceSection,
+.statsBanner { overflow-x: clip; }
 
 .aboutHero {
   position: relative;
   min-height: 55vh;
+  /* Stable height while the mobile URL bar collapses — no hero resize on scroll. */
+  min-height: 55svh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -31,7 +43,7 @@
 
 .aboutHeroTitle {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 7vw, 4.5rem);
   color: white;
   margin: var(--space-md) 0;
   line-height: 1.15;
@@ -169,6 +181,8 @@
 .experienceImages {
   position: relative;
   height: 520px;
+  /* Clip the absolutely-positioned collage + its in-flight reveal transform. */
+  overflow: clip;
 }
 
 .expImgLarge {
@@ -220,7 +234,13 @@
 
 .expItem:hover {
   background: var(--green-50);
-  transform: translateX(6px);
+}
+
+/* Only shift on real hover — on touch the row would stay nudged after a tap. */
+@media (hover: hover) and (pointer: fine) {
+  .expItem:hover {
+    transform: translateX(6px);
+  }
 }
 
 .expItemIcon { font-size: 1.2rem; }
